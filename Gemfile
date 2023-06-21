@@ -11,6 +11,7 @@ gem 'turbo-rails'
 gem 'stimulus-rails'
 gem 'cssbundling-rails'
 gem 'redis', '~> 4.0'
+gem 'faker'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]
