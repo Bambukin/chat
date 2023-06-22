@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  Rails.application.routes.draw do
-    root to: 'rooms#index'
+  root to: 'rooms#index'
+  resources :rooms, only: [:create, :index, :show], param: :token
 
-    resources :rooms, only: [:create, :index, :show], param: :token
-  end
-
+  mount ActionCable.server => '/cable'
 end
