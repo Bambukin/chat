@@ -16,3 +16,7 @@ gem 'faker'
 group :development, :test do
   gem 'debug'
 end
+
+group :production do
+  gem 'pg'
+end
