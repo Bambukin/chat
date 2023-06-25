@@ -9,7 +9,7 @@ document.addEventListener('turbo:load', function (event) {
 })
 
 function createPresenceChannel(roomId) {
-  window.room = consumer.subscriptions.create({channel: "PresenceChannel", roomId: roomId}, {
+  consumer.subscriptions.create({channel: "PresenceChannel", roomId: roomId}, {
     connected() {
       console.log('Connected to PresenceChannel');
     },
