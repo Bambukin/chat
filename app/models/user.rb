@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   before_create :generate_nickname
 
+  has_many :messages, dependent: :destroy
+  has_many :members, dependent: :destroy
+
   private
 
   def generate_nickname

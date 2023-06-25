@@ -20,7 +20,7 @@ function createPresenceChannel(roomId) {
 
     received(data) {
       console.log('Received data from PresenceChannel: ' + data['message']);
-      document.getElementById('status').innerHTML += data.message;
+      document.getElementById('status').innerHTML = data.message;
     }
   });
 }

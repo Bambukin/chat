@@ -4,11 +4,13 @@ class PresenceChannel < ApplicationCable::Channel
 
     @room = Room.find(params[:roomId])
     stream_from "presence_channel_#{@room.id}"
-    ActionCable.server.broadcast "presence_channel_#{@room.id}", { message: current_user.nickname }
+    MemberService.new(user: current_user, room: @room).create
   end
 
   def unsubscribed
     logger.info "unsubscribed from PresenceChannel"
-    ActionCable.server.broadcast "presence_channel_#{@room.id}", { message: current_user.nickname }
+
+    @room = Room.find(params[:roomId])
+    MemberService.new(user: current_user, room: @room).destroy
   end
 end
