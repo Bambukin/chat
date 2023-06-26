@@ -15,4 +15,5 @@ gem 'faker'
 
 group :production do
   gem 'pg'
+  gem 'sidekiq'
 end
