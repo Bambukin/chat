@@ -18,6 +18,6 @@ class RoomsController < ApplicationController
   private
 
   def set_room
-    @room = Room.find_by(token: params[:token])
+    @room = Room.find_by!(token: params[:token])
   end
 end
