@@ -17,11 +17,15 @@ class ParticipantService
   private
 
   def create_participant!
-    Participant.create(room: @room, user: @user)
+    participant = Participant.find_or_create_by!(room: @room, user: @user)
+    participant.connections += 1
+    participant.save!
   end
 
   def destroy_participant!
-    Participant.where(room: @room, user: @user).destroy_all
+    participant = Participant.where(room: @room, user: @user).first
+    participant.connections -= 1
+    participant.connections.zero? ? participant.destroy! : participant.save!
   end
 
   def broadcast_message
