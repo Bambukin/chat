@@ -20,7 +20,7 @@ function createStatusChannel(roomId) {
 
     received(data) {
       console.log('Received data from StatusChannel: ' + data['message']);
-      document.getElementById('status').innerHTML = data.message;
+      document.getElementById('status').innerHTML = JSON.parse(data.message).names.join(' ');
     }
   });
 }

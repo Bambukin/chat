@@ -31,6 +31,7 @@ class ParticipantService
   end
 
   def render_message
-    ApplicationController.renderer.render(partial: 'participants/participant', collection: @room.participants, as: :participant)
+    user_names = @room.participants.map { |participant| participant.user.nickname }
+    { names: user_names }.to_json
   end
 end
