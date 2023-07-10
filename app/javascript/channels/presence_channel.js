@@ -17,10 +17,5 @@ function createPresenceChannel(roomId) {
     disconnected() {
       console.log('Disconnected from PresenceChannel');
     },
-
-    received(data) {
-      console.log('Received data from PresenceChannel: ' + data['message']);
-      document.getElementById('status').innerHTML = data.message;
-    }
   });
 }
