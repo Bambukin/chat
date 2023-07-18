@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.1'
 gem 'rails', '~> 7.0.5'
+gem 'rubocop', group: 'development', require: false
 gem 'sprockets-rails'
 gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 5.0'

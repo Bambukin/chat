@@ -1,4 +1,12 @@
 class ParticipantService
+  def self.still_connected?(user)
+    still_there = PresenceChannel.broadcast_to(user, action: 'presence-check')
+
+    return true if still_there.to_i.positive?
+
+    false
+  end
+
   def initialize(user:, room:)
     @user = user
     @room = room
@@ -6,12 +14,12 @@ class ParticipantService
 
   def create
     create_participant!
-    broadcast_message
+    broadcast_status('online')
   end
 
   def destroy
     destroy_participant!
-    broadcast_message
+    broadcast_status('offline')
   end
 
   private
@@ -26,12 +34,7 @@ class ParticipantService
     participant.destroy!
   end
 
-  def broadcast_message
-    ActionCable.server.broadcast "status_channel_#{@room.id}", { message: render_message }
-  end
-
-  def render_message
-    user_names = @room.participants.map { |participant| participant.user.nickname }
-    { names: user_names }.to_json
+  def broadcast_status(status)
+    ActionCable.server.broadcast "status_channel_#{@room.id}", { user: @user.nickname, status: }
   end
 end

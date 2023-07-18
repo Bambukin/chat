@@ -3,7 +3,7 @@ class HandleOfflineJob < ApplicationJob
 
   def perform(user, room)
 
-    return if user.still_connected? # might have other tabs open
+    return if ParticipantService.still_connected?(user) # might have other tabs open
 
     ParticipantService.new(user: user, room: room).destroy
   end

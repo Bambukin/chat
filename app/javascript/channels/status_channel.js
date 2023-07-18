@@ -19,8 +19,19 @@ function createStatusChannel(roomId) {
     },
 
     received(data) {
-      console.log('Received data from StatusChannel: ' + data['message']);
-      document.getElementById('status').innerHTML = JSON.parse(data.message).names.join(' ');
+      console.log('Received data from StatusChannel: ' + data['user'] + '-' + data['status']);
+      let userNickname = document.getElementById(data.user);
+
+      if (data.status === 'online') {
+        if (userNickname) return
+
+        let spanElement = document.createElement('span');
+        spanElement.textContent = data.user;
+        spanElement.setAttribute('id', data.user)
+        document.getElementById('status').appendChild(spanElement);
+      } else if (data.status === 'offline') {
+        userNickname.remove();
+      }
     }
   });
 }
