@@ -5,10 +5,11 @@ document.addEventListener('turbo:load', function (event) {
 
   if (messages) {
     createRoomChannel(messages.dataset.roomId);
+    messages.scrollTop = messages.scrollHeight;
   }
 })
 
-document.addEventListener('keypress', function(event) {
+document.addEventListener('keypress', function (event) {
   if (event.target.matches('#message_body')) {
     const message = event.target.value;
     if (event.keyCode === 13 && message !== '') {
@@ -33,7 +34,9 @@ function createRoomChannel(roomId) {
     received(data) {
       console.log('Received data from RoomChannel: ' + data['message']);
 
-      document.getElementById('messages').innerHTML += data.message;
+      const messages = document.getElementById('messages');
+      messages.innerHTML += data.message;
+      messages.scrollTop = messages.scrollHeight;
     },
 
     speak: function (message) {
