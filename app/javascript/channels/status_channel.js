@@ -19,11 +19,14 @@ function createStatusChannel(roomId) {
     },
 
     received(data) {
-      console.log('Received data from StatusChannel: ' + data['user'] + '-' + data['status']);
+      console.log(`Received data from StatusChannel: ${data.user}-${data.status}`);
       let userNickname = document.getElementById(data.user);
 
       if (data.status === 'online') {
         if (userNickname) return
+
+        let spaceNode = document.createTextNode(' ');
+        document.getElementById('status').appendChild(spaceNode);
 
         let spanElement = document.createElement('span');
         spanElement.textContent = data.user;

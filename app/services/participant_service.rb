@@ -1,10 +1,7 @@
 class ParticipantService
   def self.still_connected?(user)
     still_there = PresenceChannel.broadcast_to(user, action: 'presence-check')
-
-    return true if still_there.to_i.positive?
-
-    false
+    still_there.to_i.positive?
   end
 
   def initialize(user:, room:)
