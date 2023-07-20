@@ -19,20 +19,15 @@ function createStatusChannel(roomId) {
     },
 
     received(data) {
-      console.log(`Received data from StatusChannel: ${data.user}-${data.status}`);
-      let userNickname = document.getElementById(data.user);
+      const { status, user } = data
+      console.log(`Received data from StatusChannel: ${status}-${user}`);
+      let userNickname = document.getElementById(user);
 
-      if (data.status === 'online') {
+      if (status === 'online') {
         if (userNickname) return
 
-        let spaceNode = document.createTextNode(' ');
-        document.getElementById('status').appendChild(spaceNode);
-
-        let spanElement = document.createElement('span');
-        spanElement.textContent = data.user;
-        spanElement.setAttribute('id', data.user)
-        document.getElementById('status').appendChild(spanElement);
-      } else if (data.status === 'offline') {
+        document.getElementById('status').innerHTML += ` <span id="${user}">${user}</span>`
+      } else if (status === 'offline') {
         userNickname.remove();
       }
     }
