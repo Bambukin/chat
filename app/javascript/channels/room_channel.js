@@ -16,6 +16,8 @@ document.addEventListener('keypress', function (event) {
       room.speak(message);
       event.target.value = '';
       event.preventDefault();
+    } else if (event.keyCode === 13 && message === '') {
+      event.preventDefault();
     }
   }
 });
