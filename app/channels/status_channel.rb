@@ -19,8 +19,6 @@ class StatusChannel < ApplicationCable::Channel
   private
 
   def handle_offline
-    HandleOfflineJob
-      .set(wait_until: Time.zone.now + 5)
-      .perform_later(current_user, @room)
+    HandleOfflineJob.perform_in(5.seconds, current_user, @room)
   end
 end

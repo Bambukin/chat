@@ -12,6 +12,7 @@ gem 'stimulus-rails'
 gem 'cssbundling-rails'
 gem 'redis', '~> 4.0'
 gem 'faker'
+gem 'sidekiq'
 
 group :development do
   gem 'rubocop', require: false
@@ -19,5 +20,4 @@ end
 
 group :production do
   gem 'pg'
-  gem 'sidekiq'
 end
