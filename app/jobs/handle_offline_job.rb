@@ -1,4 +1,5 @@
-class HandleOfflineJob < ApplicationJob
+class HandleOfflineJob
+  include Sidekiq::Job
   queue_as :critical
 
   def perform(user, room)
