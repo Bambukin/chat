@@ -19,6 +19,6 @@ class StatusChannel < ApplicationCable::Channel
   private
 
   def handle_offline
-    HandleOfflineJob.perform_in(5.seconds, current_user, @room)
+    HandleOfflineJob.perform_in(5.seconds, current_user.id, @room.id)
   end
 end
